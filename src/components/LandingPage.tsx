@@ -1,12 +1,17 @@
 "use client";
 
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { Package, TrendingUp, Archive, ShoppingCart, Users, BarChart3 } from 'lucide-react';
 
 export default function LandingPage() {
   const router = useRouter();
+  const pathname = usePathname();
 
   const handleCardClick = (route: string) => {
+    router.push(route);
+  };
+
+  const handleNavClick = (route: string) => {
     router.push(route);
   };
 
@@ -23,9 +28,36 @@ export default function LandingPage() {
               <h1 className="text-2xl font-bold text-gray-900 dark:text-white">InvenEase</h1>
             </div>
             <nav className="hidden md:flex space-x-8">
-              <a href="#" className="text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors">Dashboard</a>
-              <a href="#" className="text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors">Settings</a>
-              <a href="#" className="text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors">Support</a>
+              <button 
+                onClick={() => handleNavClick('/')}
+                className={`transition-colors ${
+                  pathname === '/' 
+                    ? 'text-blue-600 dark:text-blue-400 font-semibold' 
+                    : 'text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400'
+                }`}
+              >
+                Dashboard
+              </button>
+              <button 
+                onClick={() => handleNavClick('/settings')}
+                className={`transition-colors ${
+                  pathname === '/settings' 
+                    ? 'text-blue-600 dark:text-blue-400 font-semibold' 
+                    : 'text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400'
+                }`}
+              >
+                Settings
+              </button>
+              <button 
+                onClick={() => handleNavClick('/support')}
+                className={`transition-colors ${
+                  pathname === '/support' 
+                    ? 'text-blue-600 dark:text-blue-400 font-semibold' 
+                    : 'text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400'
+                }`}
+              >
+                Support
+              </button>
             </nav>
           </div>
         </div>
